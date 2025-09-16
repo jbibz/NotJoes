@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  portfolio-website:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    # Name the container so NGINX Proxy Manager can find it
+    container_name: personal-portfolio
+    # Restart the container automatically if it stops
+    restart: unless-stopped
+    # No 'ports' section is needed. NPM will connect directly to the container
+    # on the 'homelab' network.
+    networks:
+      - homelab
+
+networks:
+  homelab:
+    # This tells Docker to use the network you already created
+    external: true
+
